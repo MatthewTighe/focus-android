@@ -19,6 +19,7 @@ import org.mozilla.focus.activity.robots.searchScreen
 import org.mozilla.focus.helpers.FeatureSettingsHelper
 import org.mozilla.focus.helpers.MainActivityFirstrunTestRule
 import org.mozilla.focus.helpers.MockWebServerHelper
+import org.mozilla.focus.helpers.TestAssetHelper.getGenericAsset
 import org.mozilla.focus.helpers.TestAssetHelper.getMediaTestAsset
 import org.mozilla.focus.helpers.TestHelper.exitToTop
 import org.mozilla.focus.helpers.TestHelper.getTargetContext
@@ -133,6 +134,7 @@ class SitePermissionsTest {
     //@Ignore("https://github.com/mozilla-mobile/focus-android/issues/6967")
     // Tests the autoplay setting: Allow audio and video on a video with autoplay and muted attributes
     fun allowAudioVideoAutoplayPermissionOnMutedVideoTest() {
+        val genericPage = getGenericAsset(webServer)
         val mutedVideoPage = getMediaTestAsset(webServer, "mutedVideoPage")
 
         homeScreen {
@@ -145,7 +147,7 @@ class SitePermissionsTest {
             exitToTop()
         }
         searchScreen {
-        }.loadPage("test") {
+        }.loadPage(genericPage.url) {
         }.clearBrowsingData {}
         searchScreen {
         }.loadPage(mutedVideoPage.url) {
